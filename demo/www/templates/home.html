@@ -1,0 +1,33 @@
+<ion-view view-title="Home">
+  <ion-content class="padding">
+    <div class="list">
+
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <input type="text" ng-model="data.chipType">
+        </label>
+        <button class="button button-small">
+          型号
+        </button>
+      </div>
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <input type="text" ng-model="data.chipId">
+        </label>
+        <button class="button button-small">
+          芯片id
+        </button>
+      </div>
+      
+
+    </div>
+  </ion-content>
+  <div class="bar bar-footer bar-balanced">
+    <div class="button-bar">
+       <a class="button " ng-click="getPairedDevices()">蓝牙</a>
+       <a class="button " ng-click="connect()">连接</a>
+       <a class="button " ng-click="print()">打印</a>
+       <a class="button " ng-click="selectModel()">模板</a>
+    </div>
+  </div>
+</ion-view>

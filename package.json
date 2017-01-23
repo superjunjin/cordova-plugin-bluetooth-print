@@ -1,0 +1,22 @@
+{
+  "name": "cordova-plugin-bluetooth-print",
+  "version": "1.0.0",
+  "description": "Cordova Bluetooth Print Plugin",
+  "cordova": {
+    "id": "cordova-plugin-bluetooth-print",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/superjunjin/cordova-plugin-bluetooth-print.git"
+  },
+  "keywords": [
+    "cordova",
+    "bluetooth",
+    "print"
+  ],
+  "author": "superjunjin",
+  "license": "superjunjin"
+}

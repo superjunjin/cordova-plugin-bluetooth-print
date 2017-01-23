@@ -1,0 +1,11 @@
+
+<ion-modal-view class="setting-view">
+  <ion-header-bar>
+    <h2 class="title">选择模板</h2>
+  </ion-header-bar>
+  <ion-content >
+    <div class="list">
+      <ion-radio ng-repeat="item in data.models " ng-model="data.selectModel" ng-value="item.value" ng-click="getOneModel(item.value)">{{item.name}}</ion-radio>
+    </div>
+  </ion-content>
+</ion-modal-view>

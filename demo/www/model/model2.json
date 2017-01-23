@@ -1,0 +1,11 @@
+{
+  "SIZE": "SIZE 35 mm, 30 mm",
+  "GAP": "GAP 2 mm,0",
+  "SPEED": "SPEED 4",
+  "DENSITY": "DENSITY 8",
+  "DIRECTION": "DIRECTION 1",
+  "CLS": "CLS",
+  "TEXT1": "TEXT 20,30,\"3\",0,1,1,",
+  "QRCODE": "QRCODE 100,15,H,4,A,0,",
+  "PRINT": "PRINT 1,1"
+}

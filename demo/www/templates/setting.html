@@ -1,0 +1,27 @@
+
+<ion-modal-view class="setting-view">
+  <ion-header-bar>
+    <!-- <div class="buttons left-buttons">
+      <button class="button button-icon ion-ios-arrow-back" ng-click="cancelPlaceSelected()"></button>
+    </div> -->
+    <h2 class="title">选择已配对蓝牙</h2>
+<!--     <div class="buttons right-buttons">
+      <button class="button button-clear button-calm " ng-click="confirmPlaceSelected()">确定</button>
+    </div> -->
+  </ion-header-bar>
+
+  
+
+  <ion-content >
+    <div class="list">
+      <!-- <label ng-repeat="item in ports " class="item item-radio">
+        <input type="radio" name="group" value="item.path" ng-click="getOnePort(item.path)">
+        <div class="item-content">
+          {{item.path}}
+        </div>
+        <i class="radio-icon icon ion-checkmark"></i>
+      </label -->
+      <ion-radio ng-repeat="item in data.pairedDevices " ng-model="data.selectDevice" ng-value="item.address" ng-click="getOneDevice(item.address)">{{item.name}}</ion-radio>
+    </div>
+  </ion-content>
+</ion-modal-view>

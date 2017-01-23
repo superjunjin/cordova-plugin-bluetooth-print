@@ -1,0 +1,11 @@
+{
+  "SIZE": "SIZE 15 mm, 15 mm",
+  "GAP": "GAP 2 mm,0",
+  "SPEED": "SPEED 4",
+  "DENSITY": "DENSITY 8",
+  "DIRECTION": "DIRECTION 1",
+  "CLS": "CLS",
+  "TEXT1": "TEXT 20,30,\"3\",0,1,1,",
+  
+  "PRINT": "PRINT 1,1"
+}
