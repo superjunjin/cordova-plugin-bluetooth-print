@@ -10,3 +10,6 @@ ionic项目，
 首先运行bower install，安装ionic，jquery等的库文件
 然后运行cordova platform add android，添加安卓环境和插件
 cordova build android，打包apk
+## 参考项目
+http://blog.csdn.net/reality_jie_blog/article/details/11895843
+基本思想就是通过蓝牙地址建立socket连接，然后通过流发送打印指令的字符串给打印机
