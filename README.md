@@ -2,7 +2,7 @@
 蓝牙打印插件
 
 ## 安装插件
-clone代码到本地后，把demo文件夹删除，就是插件了。
+#### clone代码到本地后，把demo文件夹删除，就是插件了。
 安装命令 cordova plugin add cordova-plugin-bluetooth-print
 
 ## demo使用
