@@ -13,3 +13,7 @@ cordova build android，打包apk
 ## 参考项目
 http://blog.csdn.net/reality_jie_blog/article/details/11895843
 基本思想就是通过蓝牙地址建立socket连接，然后通过流发送打印指令的字符串给打印机
+
+## 打印指令
+条码机编程手册
+http://download.csdn.net/detail/superjunjin/9743834
