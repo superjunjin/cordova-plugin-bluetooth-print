@@ -32,14 +32,25 @@ cordova.plugins.BluetoothPrint.getPairedDevices(function (data) {}, function (er
 参数2：失败回调函数
 
 * 连接打印机
+
 cordova.plugins.BluetoothPrint.connectDevice(address,function (data) {}, function (error) {});
+
 参数1：传入要连接的打印机的蓝牙地址
+
 参数2：成功回调函数
+
 参数3：失败回调函数
+
 * 打印
+
 cordova.plugins.BluetoothPrint.printText(str,function (data) {}, function (error) {});
+
 参数1：传入要打印的字符串命令
+
 参数2：成功回调函数
+
 参数3：失败回调函数
+
 * 关闭连接
+
 cordova.plugins.BluetoothPrint.closeConnect();
