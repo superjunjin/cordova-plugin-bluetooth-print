@@ -85,11 +85,17 @@ eg: CLS (注意事项：此项指令必须置于 SIZE 指令之后)
 语法：TEXT X, Y, ”font”, rotation, x-multiplication, y-multiplication, “content”
 
 X：文字方塊左上角 X 座标
+
 Y: 文字方塊左上角 Y 座标
+
 font：字型名称
+
 rotation：顺时针旋转角度
+
 X-multiplication：水平放大值（1-10）
+
 Y-multiplication：垂直放大值（1-10）
+
 content：文字内容字符串
 
 eg: TEXT 100,100,”3”,0,1,1,”EXAMPLE PROGRAM”
@@ -99,11 +105,17 @@ eg: TEXT 100,100,”3”,0,1,1,”EXAMPLE PROGRAM”
 语法：QRCODE X, Y, ECC Level, cell width, mode, rotation, "Data string”
 
 X：QRCODE 条码左上角 X 座标
+
 Y：QRCODE 条码左上角 Y 座标
+
 ECC level：错误纠正能力等级
+
 cell width：1-10
+
 mode：A/M(自动或手动生成编码)
+
 rotation：顺时针旋转角度
+
 Data string：条码内容字符串
 
 eg：QRCODE 10,10,H,4,A,0,"ABCabc123"
