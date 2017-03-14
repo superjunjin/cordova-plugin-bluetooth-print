@@ -54,3 +54,60 @@ cordova.plugins.BluetoothPrint.printText(str,function (data) {}, function (error
 * 关闭连接
 
 cordova.plugins.BluetoothPrint.closeConnect();
+
+## 常用打印机命令
+* SIZE(定义标签纸宽高)
+
+eg: SIZE 70 mm, 15 mm（宽70mm，高15mm）
+
+* GAP(两标签之间间隙)
+
+eg: GAP 2 mm,0 (两标签间距2mm)
+
+* SPEED(设定打印机的打印速度)
+
+eg: SPEED 4 
+
+* DENSITY(设定打印机的打印浓度)
+
+eg: DENSITY 8
+
+* DIRECTION(设定打印方向)
+
+eg: DIRECTION 1
+
+* CLS(清除数据缓存)
+
+eg: CLS (注意事项：此项指令必须置于 SIZE 指令之后)
+
+* TEXT(打印文字)
+
+语法：TEXT X, Y, ”font”, rotation, x-multiplication, y-multiplication, “content”
+
+X：文字方塊左上角 X 座标
+Y: 文字方塊左上角 Y 座标
+font：字型名称
+rotation：顺时针旋转角度
+X-multiplication：水平放大值（1-10）
+Y-multiplication：垂直放大值（1-10）
+content：文字内容字符串
+
+eg: TEXT 100,100,”3”,0,1,1,”EXAMPLE PROGRAM”
+
+* QRCODE(打印二维码)
+
+语法：QRCODE X, Y, ECC Level, cell width, mode, rotation, "Data string”
+
+X：QRCODE 条码左上角 X 座标
+Y：QRCODE 条码左上角 Y 座标
+ECC level：错误纠正能力等级
+cell width：1-10
+mode：A/M(自动或手动生成编码)
+rotation：顺时针旋转角度
+Data string：条码内容字符串
+
+eg：QRCODE 10,10,H,4,A,0,"ABCabc123"
+
+* PRINT(打印张数)
+
+eg：PRINT 1,1 （打印一张）
