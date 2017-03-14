@@ -24,9 +24,13 @@ http://download.csdn.net/detail/superjunjin/9743834
 
 ## 常用方法 
 * 获取配对蓝牙列表
+
 cordova.plugins.BluetoothPrint.getPairedDevices(function (data) {}, function (error) {});
+
 参数1：成功回调函数，返回配对蓝牙列表数据
+
 参数2：失败回调函数
+
 * 连接打印机
 cordova.plugins.BluetoothPrint.connectDevice(address,function (data) {}, function (error) {});
 参数1：传入要连接的打印机的蓝牙地址
