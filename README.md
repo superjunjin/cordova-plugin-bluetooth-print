@@ -123,3 +123,7 @@ eg：QRCODE 10,10,H,4,A,0,"ABCabc123"
 * PRINT(打印张数)
 
 eg：PRINT 1,1 （打印一张）
+
+
+## 模板
+demo/www/model文件夹下有三个固定模板，具体样式，如何引入参见demo
