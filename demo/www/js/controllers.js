@@ -161,16 +161,17 @@ angular.module('starter.controllers', [])
     function connectGPrint(address) {
         // alert(address);
         if (address != null && address !== "" && address !== "null") {
-            $ionicLoading.show({
-                template: 'Loading...'
-            });
+            // $ionicLoading.show({
+            //     template: 'Loading...'
+            // });
             if (window.cordova && cordova.plugins.BluetoothPrint) {
                 cordova.plugins.BluetoothPrint.connectDevice(address, function (success) {
                     //连接成功，存入选中的蓝牙地址
-                    window.localStorage.setItem("gprinter_add", angular.toJson(address)); 
-                    $ionicLoading.hide();
+                    // $ionicLoading.hide();
+                    window.localStorage.setItem("gprinter_add", angular.toJson(address));
+                     
                 }, function (error) {
-                    $ionicLoading.hide();
+                    // $ionicLoading.hide();   
                 });
             }
         }
@@ -202,12 +203,12 @@ angular.module('starter.controllers', [])
     $scope.getPairedDevices = function () {
 
         if (window.cordova && cordova.plugins.BluetoothPrint) {
-            $ionicLoading.show({
-                template: 'Loading...'
-            });
+            // $ionicLoading.show({
+            //     template: 'Loading...'
+            // });
             // alert("getPairedDevices");
             cordova.plugins.BluetoothPrint.getPairedDevices(function (data) {
-                $ionicLoading.hide();
+                // $ionicLoading.hide();
                 $scope.data.pairedDevices = [];
                 var dataArray = data.split(",");
                 for (var i = 0; i < dataArray.length - 1; i++) {
@@ -223,7 +224,7 @@ angular.module('starter.controllers', [])
                 $scope.settingModal.show();
                 
             }, function (error) {
-                $ionicLoading.hide();
+                // $ionicLoading.hide();
                 alert(error);
             });
         }
