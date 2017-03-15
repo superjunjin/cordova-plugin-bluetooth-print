@@ -37,42 +37,42 @@ angular.module('starter.controllers', [])
         $scope.modal = modal;
     });
 
-    document.addEventListener('bluetoothprint.DataReceived', function (e) {
-        $rootScope.$broadcast('bluetoothprint.DataReceived', e.bluetoothPrintData);
-    }, false);
-    document.addEventListener('bluetoothprint.StatusReceived', function (e) {
-        $rootScope.$broadcast('bluetoothprint.StatusReceived', e.bluetoothPrintStatus);
-    }, false);
+    // document.addEventListener('bluetoothprint.DataReceived', function (e) {
+    //     $rootScope.$broadcast('bluetoothprint.DataReceived', e.bluetoothPrintData);
+    // }, false);
+    // document.addEventListener('bluetoothprint.StatusReceived', function (e) {
+    //     $rootScope.$broadcast('bluetoothprint.StatusReceived', e.bluetoothPrintStatus);
+    // }, false);
 
     document.addEventListener("deviceready", function () {
 
-        $scope.$on('bluetoothprint.DataReceived', function (e, data) {
+        // $scope.$on('bluetoothprint.DataReceived', function (e, data) {
 
-            $scope.data.pairedDevices = [];
-            var dataArray = data.split(",");
-            for (var i = 0; i < dataArray.length - 1; i++) {
-                var str = dataArray[i];
-                var name = str.substring(0, str.indexOf("&"));
-                var address = str.substring(str.indexOf("&") + 1);
-                $scope.data.pairedDevices.push({
-                    name: name,
-                    address: address
-                });
-            }
+        //     $scope.data.pairedDevices = [];
+        //     var dataArray = data.split(",");
+        //     for (var i = 0; i < dataArray.length - 1; i++) {
+        //         var str = dataArray[i];
+        //         var name = str.substring(0, str.indexOf("&"));
+        //         var address = str.substring(str.indexOf("&") + 1);
+        //         $scope.data.pairedDevices.push({
+        //             name: name,
+        //             address: address
+        //         });
+        //     }
 
-            $scope.settingModal.show();
+        //     $scope.settingModal.show();
 
-        });
+        // });
 
-        $scope.$on('bluetoothprint.StatusReceived', function (e, data) {
-            //连接成功，存入选中的
-            if (data === "true") {
-                if ($scope.data.selectDevice != null && $scope.data.selectDevice !== "") {
-                    window.localStorage.setItem("gprinter", angular.toJson($scope.data.selectDevice));
-                }  
-            }
-            $ionicLoading.hide();
-        });
+        // $scope.$on('bluetoothprint.StatusReceived', function (e, data) {
+        //     //连接成功，存入选中的
+        //     if (data === "true") {
+        //         if ($scope.data.selectDevice != null && $scope.data.selectDevice !== "") {
+        //             window.localStorage.setItem("gprinter", angular.toJson($scope.data.selectDevice));
+        //         }  
+        //     }
+        //     $ionicLoading.hide();
+        // });
 
         //如果有打印机地址，连接打印机
         var gprinter_address = angular.fromJson(window.localStorage.getItem("gprinter")) + "";   
@@ -86,9 +86,9 @@ angular.module('starter.controllers', [])
     function printTag(){
         getPrintString().then(function(str){
             cordova.plugins.BluetoothPrint.printText(str, function (success) {
-                imanDialog.toastBottom(success);
+                
             }, function (error) {
-                imanDialog.toastBottom(error);
+                
             });
         });
             
@@ -165,11 +165,12 @@ angular.module('starter.controllers', [])
                 template: 'Loading...'
             });
             if (window.cordova && cordova.plugins.BluetoothPrint) {
-
                 cordova.plugins.BluetoothPrint.connectDevice(address, function (success) {
-
+                    //连接成功，存入选中的蓝牙地址
+                    window.localStorage.setItem("gprinter_add", angular.toJson(address)); 
+                    $ionicLoading.hide();
                 }, function (error) {
-                    $cordovaToast.showShortBottom(error);
+                    $ionicLoading.hide();
                 });
             }
         }
@@ -201,10 +202,29 @@ angular.module('starter.controllers', [])
     $scope.getPairedDevices = function () {
 
         if (window.cordova && cordova.plugins.BluetoothPrint) {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+            // alert("getPairedDevices");
+            cordova.plugins.BluetoothPrint.getPairedDevices(function (data) {
+                $ionicLoading.hide();
+                $scope.data.pairedDevices = [];
+                var dataArray = data.split(",");
+                for (var i = 0; i < dataArray.length - 1; i++) {
+                    var str = dataArray[i];
+                    var name = str.substring(0, str.indexOf("&"));
+                    var address = str.substring(str.indexOf("&") + 1);
+                    $scope.data.pairedDevices.push({
+                        name: name,
+                        address: address
+                    });
+                }
 
-            cordova.plugins.BluetoothPrint.getPairedDevices(function () {
-
-            }, function () {
+                $scope.settingModal.show();
+                
+            }, function (error) {
+                $ionicLoading.hide();
+                alert(error);
             });
         }
     };
