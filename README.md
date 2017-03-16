@@ -56,13 +56,18 @@ cordova.plugins.BluetoothPrint.printText(str,function (data) {}, function (error
 cordova.plugins.BluetoothPrint.closeConnect();
 
 ## 常用打印机命令
-* SIZE(定义标签纸宽高)
+* SIZE(定义标签纸宽高)(必须设置)
 
 eg: SIZE 70 mm, 15 mm（宽70mm，高15mm）
 
-* GAP(两标签之间间隙)
+* GAP(两标签之间间隙)(必须设置)
 
-eg: GAP 2 mm,0 (两标签间距2mm)
+语法：GAP m mm, n mm
+
+m：间隙高度
+n：间隙高度的补偿值
+
+eg: GAP 2 mm, 0 mm (两标签间距2mm)
 
 * SPEED(设定打印机的打印速度)
 
@@ -76,7 +81,7 @@ eg: DENSITY 8
 
 eg: DIRECTION 1
 
-* CLS(清除数据缓存)
+* CLS(清除数据缓存)(必须设置)
 
 eg: CLS (注意事项：此项指令必须置于 SIZE 指令之后)
 
@@ -120,11 +125,25 @@ Data string：条码内容字符串
 
 eg：QRCODE 10,10,H,4,A,0,"ABCabc123"
 
-* PRINT(打印张数)
+* PRINT(打印张数)(必须设置)
+
+语法： PRINT m,n
+
+m：打印张数
+
+n：每张标签需重复打印的张数
 
 eg：PRINT 1,1 （打印一张）
 
 
 
 ## 注意
-在拼接打印命令字符串时，每个命令结束都要加换行符，最后一行也要加
+
+* SIZE，GAP，CLS，PRINT命令是必须设置的
+
+* 在拼接打印命令字符串时，每个命令结束都要加换行符，最后一行也要加
+
+* PRINT命令必须设置在打印命令字符串最后
+
+* 打印内容命令（TEXT等命令）必须置于打印准备命令之后（SIZE等命令）
+

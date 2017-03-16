@@ -39,7 +39,7 @@ angular.module('starter.controllers', [])
 
     document.addEventListener("deviceready", function () {
         //如果有打印机地址，连接打印机
-        var gprinter_address = angular.fromJson(window.localStorage.getItem("gprinter")) + "";   
+        var gprinter_address = angular.fromJson(window.localStorage.getItem("gprinter_add")) + "";   
         if (gprinter_address != null && gprinter_address !== "") {
             connectGPrint(gprinter_address);
         }
@@ -102,7 +102,7 @@ angular.module('starter.controllers', [])
     }
 
     function getModel1Str(){
-        return getSIZE(70,15)+"\n"
+        return getSIZE(40,30)+"\n"
                + getGAP(2,0)+"\n"
                + getSPEED(4)+"\n"
                + getDENSITY(8)+"\n"
@@ -110,16 +110,18 @@ angular.module('starter.controllers', [])
                + getCLS()+"\n"
                + getTEXT(20,30,3,0,1,1,$scope.data.chipType)+"\n"
                + getTEXT(20,80,3,0,1,1,$scope.data.chipId)+"\n"
+               + getTEXT(20,130,3,0,1,1,$scope.data.chipId)+"\n"
                + getPRINT(1,1)+"\n";
 
     }
     function getModel2Str(){
-        return getSIZE(70,15)+"\n"
+        return getSIZE(70,15)+"\n" 
                + getGAP(2,0)+"\n"
                + getSPEED(4)+"\n"
                + getDENSITY(8)+"\n"
                + getDIRECTION(1)+"\n"
                + getCLS()+"\n"
+               + getTEXT(20,100,3,0,1,1,$scope.data.chipId)+"\n"
                + getTEXT(20,30,3,0,1,1,$scope.data.chipType)+"\n"
                + getQRCODE(100,15,"H",4,"A",0,$scope.data.chipId)+"\n"
                + getPRINT(1,1)+"\n";
