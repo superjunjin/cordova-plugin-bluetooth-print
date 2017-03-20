@@ -53,7 +53,11 @@ cordova.plugins.BluetoothPrint.printText(str,function (data) {}, function (error
 
 * 关闭连接
 
-cordova.plugins.BluetoothPrint.closeConnect();
+cordova.plugins.BluetoothPrint.closeConnect(function (data) {}, function (error) {});
+
+参数1：成功回调函数
+
+参数2：失败回调函数
 
 ## 常用打印机命令
 * SIZE(定义标签纸宽高)(必须设置)
@@ -105,6 +109,30 @@ content：文字内容字符串
 
 eg: TEXT 100,100,”3”,0,1,1,”EXAMPLE PROGRAM”
 
+* QRCODE(打印一维码)
+
+语法：BARCODE X, Y, ”code type”, height, human readable, rotation, narrow, wide, “code”
+
+X：条码左上角 X 座标
+
+Y：条码左上角 Y 座标
+
+code type：条码类型
+
+height：条码高度
+
+human readable：0 : 无人眼可识别码/1 : 有人眼可识别码
+
+rotation：顺时针旋转条码角度
+
+narrow：窄条码比例因子 (dot)
+
+wide：宽条码比例因子 (dot)
+
+code：条码内容
+
+eg：BARCODE 100,100,”128”,96,1,0,2,4,”1000”
+
 * QRCODE(打印二维码)
 
 语法：QRCODE X, Y, ECC Level, cell width, mode, rotation, "Data string”
@@ -147,3 +175,4 @@ eg：PRINT 1,1 （打印一张）
 
 * 打印内容命令（TEXT等命令）必须置于打印准备命令之后（SIZE等命令）
 
+* 关于联打多条标签的列子，参照模板1
