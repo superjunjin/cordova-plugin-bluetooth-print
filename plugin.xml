@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-bluetooth-print" version="0.1">
+        id="cordova-plugin-bluetooth-print" version="1.0.3">
 
     <name>BluetoothPrint</name>
     <description>Cordova Plugin</description>

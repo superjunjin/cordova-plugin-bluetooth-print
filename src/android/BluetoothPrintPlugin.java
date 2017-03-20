@@ -80,7 +80,7 @@ public class BluetoothPrintPlugin extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         //获取已配对的蓝牙设备
         if (action.equals("getPairedDevices")) {
-            getPairedDevices();
+            getPairedDevices(args, callbackContext);
             return true;
         }
         //连接选中的蓝牙设备(打印机)
@@ -95,21 +95,21 @@ public class BluetoothPrintPlugin extends CordovaPlugin {
         }
         //断开连接
         if (action.equals("closeConnect")){
-            closeConnect();
+            closeConnect(args, callbackContext);
             return true;
         }
         
         return false;
     }
 
-    private void closeConnect(){
+    private void closeConnect(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
         try {    
             bluetoothSocket.close();    
             outputStream.close();
-            Toast.makeText(activity.getApplicationContext(), "断开连接成功！", 1).show();     
+            callbackContext.success("断开连接成功！");    
         } catch (IOException e) {    
-            // TODO Auto-generated catch block    
-            Toast.makeText(activity.getApplicationContext(), "断开连接失败！", 1).show();   
+            // TODO Auto-generated catch block 
+            callbackContext.error("断开连接失败！");     
         }  
     }
 
@@ -125,48 +125,35 @@ public class BluetoothPrintPlugin extends CordovaPlugin {
                 bluetoothSocket.connect();
                 outputStream = bluetoothSocket.getOutputStream();
                 isConnection = true;
-                callbackContext.success();
-                Toast.makeText(activity.getApplicationContext(), device.getName() + "连接成功！",
-                    Toast.LENGTH_SHORT).show();
+                callbackContext.success("连接成功");
             } catch (Exception e) {
                 isConnection = false;
-                callbackContext.error();
-                Toast.makeText(activity.getApplicationContext(), "连接失败！", 1).show();  
+                callbackContext.error("连接失败");     
             }
         } 
-
-        // String jsEvent = String.format(
-        //         "cordova.fireDocumentEvent('bluetoothprint.StatusReceived',{'bluetoothPrintStatus':'%s'})",
-        //         isConnection);
-        // webView.sendJavascript(jsEvent);   
     }
 
     private void getPairedDevices(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
-
         // Get the local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         // Get a set of currently paired devices
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
         // If there are paired devices, add each one to the ArrayAdapter
         if (pairedDevices.size() > 0) {
-            String str = "";
-            for (BluetoothDevice device : pairedDevices) {  
-                str+= device.getName() + "&"+ device.getAddress() +",";   
+            JSONArray json = new JSONArray();
+            for (BluetoothDevice device : pairedDevices) {
+                JSONObject jo = new JSONObject();
+                jo.put("name", device.getName());
+                jo.put("address", device.getAddress());
+                json.put(jo); 
             }
-            callbackContext.success(str);
-            // String jsEvent = String.format(
-            //     "cordova.fireDocumentEvent('bluetoothprint.DataReceived',{'bluetoothPrintData':'%s'})",
-            //     str);
-            // webView.sendJavascript(jsEvent);                     
+            callbackContext.success(json);                   
         }
         else{
             callbackContext.error("未有配对蓝牙");
-            Toast.makeText(activity.getApplicationContext(), "未有配对蓝牙", 1).show();  
+             
         }
-
     }
-
-
 
     private void printText(final JSONArray args, final CallbackContext callbackContext) throws JSONException{
         
@@ -178,17 +165,11 @@ public class BluetoothPrintPlugin extends CordovaPlugin {
                 outputStream.write(data, 0, data.length);
                 outputStream.flush();
                 callbackContext.success("打印成功！");
-                Toast.makeText(activity.getApplicationContext(), "打印成功！", Toast.LENGTH_SHORT)
-                        .show();
             } catch (IOException e) {
                 callbackContext.error("打印失败！");
-                Toast.makeText(activity.getApplicationContext(), "打印失败！", Toast.LENGTH_SHORT)
-                        .show();
             }
         } else {
             callbackContext.error("设备未连接，请重新连接！");
-            Toast.makeText(activity.getApplicationContext(), "设备未连接，请重新连接！", Toast.LENGTH_SHORT)
-                    .show();
         }
     }
 
