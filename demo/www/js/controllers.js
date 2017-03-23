@@ -39,9 +39,12 @@ angular.module('starter.controllers', [])
 
     document.addEventListener("deviceready", function () {
         //如果有打印机地址，连接打印机
-        var gprinter_address = angular.fromJson(window.localStorage.getItem("gprinter_add")) + "";   
-        if (gprinter_address != null && gprinter_address !== "") {
-            connectGPrint(gprinter_address);
+        $scope.data.selectDevice = angular.fromJson(window.localStorage.getItem("gprinter_add")) + "";   
+        if ($scope.data.selectDevice != null && $scope.data.selectDevice !== "") {
+            connectGPrint($scope.data.selectDevice);
+        }
+        else{
+            alert("蓝牙地址为空");
         }
 
     }, false);
@@ -152,6 +155,14 @@ angular.module('starter.controllers', [])
                + getCLS()+"\n"
                + getTEXT(20,30,3,0,1,1,"abc")+"\n"
                + getPRINT(1,2)+"\n";
+
+        // return  "SIZE 40 mm, 30 mm"+"\n"
+        //         "GAP 2 mm, 0 mm"+"\n"
+        //         "DIRECTION 1"+"\n"
+        //         "CLS"+"\n"
+        //         "TEXT 20,130,"+"\""+"3"+"\""+",0,1,1,"+"\""+"456"+"\""+"\n"
+        //         "PRINT 1,1"+"\n";
+
     }
     function getModel2Str(){
         return getSIZE(70,15)+"\n" 
@@ -211,24 +222,33 @@ angular.module('starter.controllers', [])
                     // $timeout(function(){
                     //     $ionicLoading.hide();
                     // });
-                    // alert("success");
+                    alert("连接成功");
                     window.localStorage.setItem("gprinter_add", angular.toJson(address));
                      
                 }, function (error) {
+                    alert("连接失败");
                     // $timeout(function(){
                     //     $ionicLoading.hide();
                     // });     
                 });
             }
         }
+        else{
+            alert("蓝牙地址为空");
+        }
     }
 
     //关闭打印机连接
-    function closeGPrintConnect() {
+    $scope.closeGPrintConnect = function () {
         if (window.cordova && cordova.plugins.BluetoothPrint) {
-            cordova.plugins.BluetoothPrint.closeConnect();
+            cordova.plugins.BluetoothPrint.closeConnect(function (success) {
+                alert("断开连接成功");
+            }, function (error) {
+                alert("断开连接失败");   
+            });
         }
-    }
+    };
+ 
 
     $scope.getOneDevice = function (address) {
 

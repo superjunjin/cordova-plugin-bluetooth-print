@@ -106,10 +106,14 @@ public class BluetoothPrintPlugin extends CordovaPlugin {
         try {    
             bluetoothSocket.close();    
             outputStream.close();
-            callbackContext.success("断开连接成功！");    
+            isConnection = false;  
+            callbackContext.success("断开连接成功！");
+              
         } catch (IOException e) {    
             // TODO Auto-generated catch block 
-            callbackContext.error("断开连接失败！");     
+            isConnection = true;  
+            callbackContext.error("断开连接失败！");
+
         }  
     }
 
@@ -118,7 +122,7 @@ public class BluetoothPrintPlugin extends CordovaPlugin {
         // Get the local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         device = mBluetoothAdapter.getRemoteDevice(address);
-        if (!isConnection) {
+        if (!isConnection) {//没有连接
             try {
                 bluetoothSocket = device
                         .createRfcommSocketToServiceRecord(uuid);
@@ -130,7 +134,10 @@ public class BluetoothPrintPlugin extends CordovaPlugin {
                 isConnection = false;
                 callbackContext.error("连接失败");     
             }
+        }else{//连接了
+            callbackContext.success("连接成功");
         } 
+
     }
 
     private void getPairedDevices(final JSONArray args, final CallbackContext callbackContext) throws JSONException {
