@@ -180,5 +180,7 @@ eg：PRINT 1,1 （打印一张）
 * 文字，一维码，二维码的坐标单位为dot
 
 200 DPI: 1 mm = 8 dots
+
 300 DPI: 1 mm = 12 dots
+
 DPI是指每英寸可打印的点数
